@@ -7,6 +7,12 @@ WORKDIR /tmp
 RUN apt-get update -qq
 RUN apt-get install -qq -y --no-install-recommends ca-certificates git build-essential libboost-all-dev libssl-dev libdb-dev libdb++-dev
 RUN git clone -b ${branch} ${repository} .
+ADD *.patch ./
+RUN patch -p1 -i fix-create-conf.patch
+RUN patch -p1 -i fix-seed-addresses.patch
+RUN patch -p1 -i fix-testnet.patch
+RUN patch -p1 -i mod-checkpoints.patch
+RUN patch -p1 -i mod-disconnect-olders.patch
 
 WORKDIR /tmp/src
 RUN make -f makefile.unix STATIC=1 USE_O3=1 USE_LEVELDB=1 USE_ASM=1

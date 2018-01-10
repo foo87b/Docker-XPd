@@ -1,0 +1,6 @@
+FROM foo87b/xpd:mainnet-v1.1.0-p1
+
+EXPOSE 17778 18345
+VOLUME ["/srv"]
+ENTRYPOINT ["/usr/local/bin/XPd", "-printtoconsole", "-pid=/run/XPd.pid", "-datadir=/srv", "-testnet"]
+CMD ["-server=0"]
