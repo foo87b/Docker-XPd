@@ -1,13 +1,18 @@
-diff --git a/src/version.h b/src/version.h
-index cda6b76..8baa64e 100644
---- a/src/version.h
-+++ b/src/version.h
-@@ -33,7 +33,7 @@ static const int DATABASE_VERSION = 70507;
- static const int PROTOCOL_VERSION = 91000;
+diff --git a/src/main.cpp b/src/main.cpp
+index 705fc52..534a60a 100644
+--- a/src/main.cpp
++++ b/src/main.cpp
+@@ -3138,6 +3138,13 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
+             return true;
+         }
  
- // earlier versions not supported as of Feb 2012, and are disconnected
--static const int MIN_PROTO_VERSION = 209;
-+static const int MIN_PROTO_VERSION = 91000;
- 
- // nTime field added to CAddress, starting with this version;
- // if possible, avoid requesting addresses nodes older than this
++        if (pfrom->nVersion < 91000)
++        {
++            printf("partner %s using obsolete version %i; disconnecting\n", pfrom->addr.ToString().c_str(), pfrom->nVersion);
++            pfrom->fDisconnect = true;
++            return true;
++        }
++
+         // record my external IP reported by peer
+         if (addrFrom.IsRoutable() && addrMe.IsRoutable())
+             addrSeenByPeer = addrMe;
