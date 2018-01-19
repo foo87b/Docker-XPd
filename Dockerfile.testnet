@@ -1,4 +1,4 @@
-FROM foo87b/xpd:mainnet-v1.1.0-p1
+FROM foo87b/xpd:mainnet-v1.1.0-p2
 
 EXPOSE 17778 18345
 VOLUME ["/srv"]
