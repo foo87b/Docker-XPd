@@ -1,4 +1,4 @@
-FROM ubuntu:zesty AS build
+FROM ubuntu:rolling AS build
 
 ARG repository=https://github.com/eXperiencePoints/XPCoin.git
 ARG branch=1.1.0
